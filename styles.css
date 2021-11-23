@@ -1,0 +1,117 @@
+body {}
+
+#wrapper {
+  color: white;
+}
+
+header {
+  height: 130px;
+  background: orange;
+
+}
+
+#main-content {
+  height: 400px;
+}
+
+#header-text {
+  font-size: 24px;
+  padding: 20px;
+}
+
+label {
+  padding: 10px;
+}
+
+.filter-dropdown {
+  color: white;
+  background: orange;
+  border-color: white;
+  border-radius: 7px;
+  padding: 2px;
+  font-size: 16px;
+}
+
+.filter-button {
+  color: white;
+  background: orange;
+  margin: 30px;
+  padding: 5px;
+  width: 60px;
+  height: 30px;
+  border: 1px solid white;
+  border-radius: 7px;
+}
+
+.filter-button:hover {
+  cursor: pointer;
+}
+
+.img-container {
+  width: 360px;
+  height: 200px;
+  display: block;
+  float: left;
+  margin: 50px;
+}
+
+img {
+  width: 300px;
+  height: 160px;
+  padding: 20px;
+}
+
+.make-model-text, .year-text, .price-text, .buy-btn {
+  padding-left: 20px;
+  display: block;
+  color: black;
+}
+
+
+.make-model-text {
+  font-weight: 900;
+  
+}
+
+.year-text {
+  
+}
+
+.price-text {
+
+}
+
+.buy-btn {
+  display: block;
+  color: white;
+  background: orange;
+  border-radius: 7px;
+  padding: 5px;
+  font-size: 16px;
+  margin: 10px;
+  margin-left: 20px;
+  width: 40px;
+  height: 18px;
+  text-align: center;
+}
+
+.buy-btn:hover {
+  cursor: pointer;
+}
+
+
+/* #make-dropdown {
+
+}
+
+#model-dropdown {
+
+}
+
+#price-dropdown {
+
+}
+
+#year-dropdown {
+  
+} */

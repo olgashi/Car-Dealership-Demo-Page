@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Cars for Sale</title>
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="whitespace-reset.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <script>
+      const cars = [
+        {
+          make: "Honda",
+          image: "images/honda-accord-2005.jpg",
+          model: "Accord",
+          year: 2005,
+          price: 7000,
+        },
+        {
+          make: "Honda",
+          image: "images/honda-accord-2008.jpg",
+          model: "Accord",
+          year: 2008,
+          price: 11000,
+        },
+        {
+          make: "Toyota",
+          image: "images/toyota-camry-2009.jpg",
+          model: "Camry",
+          year: 2009,
+          price: 12500,
+        },
+        {
+          make: "Toyota",
+          image: "images/toyota-corrolla-2016.jpg",
+          model: "Corolla",
+          year: 2016,
+          price: 15000,
+        },
+        {
+          make: "Suzuki",
+          image: "images/suzuki-swift-2014.jpg",
+          model: "Swift",
+          year: 2014,
+          price: 9000,
+        },
+        {
+          make: "Audi",
+          image: "images/audi-a4-2013.jpg",
+          model: "A4",
+          year: 2013,
+          price: 25000,
+        },
+        {
+          make: "Audi",
+          image: "images/audi-a4-2013.jpg",
+          model: "A4",
+          year: 2013,
+          price: 26000,
+        },
+      ];
+      document.addEventListener("DOMContentLoaded", (event) => {
+        const wrapperDiv = document.createElement("div");
+        wrapperDiv.setAttribute("id", "wrapper");
+
+        const header = document.createElement("header");
+        header.setAttribute("id", "header");
+        const headerTextElement = document.createElement('h2');
+        headerTextElement.setAttribute('id', 'header-text')
+        headerTextElement.textContent = 'Buy Used Cars';
+        header.appendChild(headerTextElement);
+
+        const mainContentDiv = document.createElement("div");
+        mainContentDiv.setAttribute("id", "main-content");
+
+        createFilteringControls(header);
+        
+        wrapperDiv.appendChild(header);
+        wrapperDiv.appendChild(mainContentDiv);
+        document.body.appendChild(wrapperDiv);
+
+        loadImages(cars);
+
+        const filterButtonEl = document.getElementsByClassName('filter-button')[0];
+        
+        filterButtonEl.addEventListener('click', event => {
+          event.stopPropagation();
+          const filterDropdownsArr = Array.from(document.querySelectorAll('.filter-dropdown'));
+
+          let selectedFilters = {};
+
+          filterDropdownsArr.forEach(dropdown => {
+            const dropdownValue = dropdown.value;
+            if (dropdownValue.toLowerCase() !== 'all') {
+              const dropdownName = dropdown.getAttribute('name');
+              selectedFilters[dropdownName] = dropdownValue;
+            }
+          });
+
+          const selectedFilterValuesArr = Object.values(selectedFilters);
+
+          let filteredCarsArr = [...cars];
+
+          selectedFilterValuesArr.forEach(filterType => {
+            filteredCarsArr = filteredCarsArr.filter(carObj => Object.values(carObj).map(item => String(item).toLowerCase()).includes(filterType));
+          });
+
+          loadImages(filteredCarsArr);
+        })
+      });
+
+      const createDropdownElement = (parent, optionsArr, nameAttrValue, idValue) => {
+        const makeLabel = document.createElement('label');
+        makeLabel.setAttribute('for', idValue);
+        makeLabel.textContent = nameAttrValue;
+
+        const selectElement = document.createElement('select');
+        selectElement.setAttribute('name', nameAttrValue.toLowerCase());
+        selectElement.setAttribute('id', idValue);
+        selectElement.classList.add('filter-dropdown');
+
+        const defaultOptionElement = document.createElement('option');
+        defaultOptionElement.setAttribute('value', 'All');
+        defaultOptionElement.textContent = 'All';
+        defaultOptionElement.setAttribute('selected', true);
+
+        selectElement.appendChild(defaultOptionElement);
+
+        console.log(optionsArr)
+
+        optionsArr.forEach(optionVal => {
+          const optionElement = document.createElement('option');
+
+          optionElement.setAttribute('value', String(optionVal).toLowerCase());
+          optionElement.textContent = optionVal;
+
+          selectElement.appendChild(optionElement);
+        });
+
+        parent.appendChild(makeLabel);
+        parent.appendChild(selectElement);
+
+        return true;
+      }
+
+      const getUniqueElementsInArray = (arr) => {
+        return Array.from(new Set(arr));
+      }
+
+      const compareAsNumbers = (a, b) => {
+        return Number(a) - Number(b);
+      }
+
+      const createFilteringControls = (parentElement) => {
+
+        const makeDropdownOptionsArr = getUniqueElementsInArray(cars.map(obj => obj.make)).sort();
+        createDropdownElement(parentElement, makeDropdownOptionsArr, 'Make',  'make-dropdown');
+        
+        const modelDropdownOptionsArr = getUniqueElementsInArray(cars.map(obj => obj.model)).sort();
+        createDropdownElement(parentElement, modelDropdownOptionsArr, 'Model',  'model-dropdown');
+        
+        const priceDropdownOptionsArr = getUniqueElementsInArray(cars.map(obj => obj.price)).sort(compareAsNumbers);
+        createDropdownElement(parentElement, priceDropdownOptionsArr, 'Price',  'price-dropdown');
+        
+        const yearDropdownOptionsArr = getUniqueElementsInArray(cars.map(obj => obj.year)).sort(compareAsNumbers);
+        createDropdownElement(parentElement, yearDropdownOptionsArr, 'Year',  'year-dropdown');
+
+        createFilterButton(parentElement);
+      }
+
+      const createFilterButton = (parentEl) => {
+        const filterButton = document.createElement('span');
+        filterButton.classList.add('filter-button');
+        filterButton.textContent = 'Filter';
+        filterButton.setAttribute('disabled', true);
+
+        parentEl.appendChild(filterButton);
+      }
+
+      const loadImages = (imgArr) => {
+        document.getElementById('main-content').replaceChildren();
+        imgArr.forEach(car => {
+          const imageDiv = document.createElement('div');
+          imageDiv.classList.add('img-container');
+          
+          const imageElement = document.createElement('img');
+          imageElement.setAttribute('src', car.image);
+          imageDiv.appendChild(imageElement);
+
+          const makeModelSpan = document.createElement('span');
+          makeModelSpan.textContent = `${car.make} ${car.model}`;
+          makeModelSpan.classList.add('make-model-text');
+          imageDiv.append(makeModelSpan);
+
+          const yearSpan = document.createElement('span');
+          yearSpan.textContent = `Year: ${car.year}`;
+          yearSpan.classList.add('year-text');
+          imageDiv.append(yearSpan);
+
+          const priceSpan = document.createElement('span');
+          priceSpan.textContent = `Price: $${car.price}`;
+          priceSpan.classList.add('price-text');
+          imageDiv.append(priceSpan);
+          
+          const buyButton = document.createElement('span');
+          buyButton.classList.add('buy-btn');
+          buyButton.textContent = "Buy";
+          imageDiv.append(buyButton);
+
+          document.getElementById('main-content').appendChild(imageDiv);
+        });
+      }
+
+    </script>
+  </body>
+</html>
