@@ -1,17 +1,22 @@
-body {}
+body {
+  background: #e5e5e5;
+}
 
 #wrapper {
   color: white;
+  display: block;
+  width: 100%;
 }
 
-header {
+#filter-container{
   height: 130px;
-  background: orange;
-
+  background: #1d3557;
 }
 
 #main-content {
   height: 400px;
+  width: 80%;
+  margin: 0 auto;
 }
 
 #header-text {
@@ -25,7 +30,7 @@ label {
 
 .filter-dropdown {
   color: white;
-  background: orange;
+  background: #1d3557;
   border-color: white;
   border-radius: 7px;
   padding: 2px;
@@ -34,7 +39,7 @@ label {
 
 .filter-button {
   color: white;
-  background: orange;
+  background: #1d3557;
   margin: 30px;
   padding: 5px;
   width: 60px;
@@ -48,11 +53,11 @@ label {
 }
 
 .img-container {
-  width: 360px;
+  width: 300px;
   height: 200px;
   display: block;
   float: left;
-  margin: 50px;
+  margin: 20px;
 }
 
 img {
@@ -67,24 +72,14 @@ img {
   color: black;
 }
 
-
 .make-model-text {
   font-weight: 900;
-  
-}
-
-.year-text {
-  
-}
-
-.price-text {
-
 }
 
 .buy-btn {
   display: block;
   color: white;
-  background: orange;
+  background: #1d3557;
   border-radius: 7px;
   padding: 5px;
   font-size: 16px;
@@ -98,20 +93,3 @@ img {
 .buy-btn:hover {
   cursor: pointer;
 }
-
-
-/* #make-dropdown {
-
-}
-
-#model-dropdown {
-
-}
-
-#price-dropdown {
-
-}
-
-#year-dropdown {
-  
-} */
