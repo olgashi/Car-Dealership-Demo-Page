@@ -13,3 +13,5 @@ Features:
 - Model dropdown dynamically adjusts to include only relevant models once the make selection is made;
 
 Deployed [here](https://carshop-demo-page.herokuapp.com/)
+
+![car-dealership](https://user-images.githubusercontent.com/41551585/165632649-8a858ac0-b84b-4633-b249-150af3a8d2b5.gif)
