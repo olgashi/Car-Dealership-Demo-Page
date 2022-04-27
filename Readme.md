@@ -1,4 +1,4 @@
-### Landing page for a car shop
+### Demo page for a car dealership
 
 Features:
 - Allows to filter cars by make, model, price, year;
